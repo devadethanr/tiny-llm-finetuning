@@ -22,3 +22,22 @@ tokenised_train_dataset = small_train_dataset.map(tokenise_function, batched=Tru
 print(f"tokenised_train_dataset {tokenised_train_dataset}")
 tokenised_test_dataset = small_test_dataset.map(tokenise_function, batched=True)
 print(f"tokenised_test_dataset {tokenised_test_dataset}")
+
+#sample texts for inital inference
+sample_texts = [
+    "This movie was absolutely amazing!",
+    "I found this movie to be quite boring.",
+    "The acting was okay, but the story was confusing",
+    "I loved all the twists in this movie"
+]
+inputs = tokeniser(sample_texts, padding=True, truncation=True, return_tensors='pt')
+print(f"inputs {inputs}")
+
+#initial inference
+with torch.no_grad():
+    outputs = model(**inputs)
+    predictions = torch.argmax(outputs.logits, dim=1)
+    print(f"predictions {predictions}")
+print("Initial predictions:")
+for text, pred in zip(sample_texts, predictions):
+    print(f"{text} - {'positive' if pred == 1 else 'negative'}")

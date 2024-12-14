@@ -1,0 +1,4 @@
+"This movie was absolutely amazing!",
+"I found this movie to be quite boring.",
+"The acting was okay, but the story was confusing",
+"I loved all the twists in this movie"
